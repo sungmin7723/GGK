@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './FlightTable.css';
+
 // 셀 정의 
 const cellMeta = {
   flight: 'excel',
@@ -27,13 +29,19 @@ const renderCell = (key, value) => {
 
 // 준비시간 자동 계산
 const FlightTable = ({ data }) => {
+  // 비행편, 도착지, 완료 여부를 필터링하기 위한 상태
+  // 필터 입력을 바꾸면 값이 변경되면서 필터링된 데이터가 보여진다.
   const [flightFilter, setFlightFilter] = useState('');
   const [destinationFilter, setDestinationFilter] = useState('');
   const [completedFilter, setCompletedFilter] = useState('');
+
+  // data 배열에서 flight, destination 필드를 각각 뽑아 고유값으로 만들고 다시 배열로 변환
+  // 필터 드롭다운 메뉴 등에 사용
   const uniqueFlights = [...new Set(data.map(f => f.flight))];
   const uniqueDestinations = [...new Set(data.map(f => f.destination))];
 
-
+  // useState 초기값을 함수형으로 제공
+  // data를 순회하며 completed === 'Y'인 항목만 id를 키로 하는 객체를 생성
   const [completionTimestamps, setCompletionTimestamps] = useState(() =>
   data.reduce((acc, item) => {
     if (item.completed === 'Y') {
@@ -45,7 +53,6 @@ const FlightTable = ({ data }) => {
     return acc;
   }, {})
   );
-
 
   const [completionStatus, setCompletionStatus] = useState(() =>
   data.reduce((acc, item) => {

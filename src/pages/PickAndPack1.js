@@ -174,7 +174,7 @@ const pickPack1Data = [
 const PickAndPack1 = () => (
   <div>
 
-    <h2 style={{ textAlign: 'center', marginTop: '20px' , marginBottom: '30px', fontSize: '24px'}}>Pick and Pack 1</h2>
+    <h2 style={{ textAlign: 'center', marginBottom: '20px'}}>Pick and Pack 1</h2>
     <FlightTable data={pickPack1Data} />
   </div>
 );

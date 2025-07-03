@@ -1,0 +1,104 @@
+/* 기본 테이블 스타일 (데스크탑) */
+.flight-table-container {
+  max-width: 100%; /* 풀 페이지 */
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.filter-controls {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.table-wrapper {
+  overflow-x: hidden;
+}
+
+.flight-table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
+.flight-table th,
+.flight-table td {
+  border: 1px solid #ccc;
+  padding: 12px 10px;
+  text-align: left;
+  white-space: normal;
+}
+
+.flight-table th {
+  background-color: #f8f8f8;
+  white-space: nowrap;
+}
+
+.flight-table td {
+  word-break: keep-all;
+}
+
+.flight-table .center-align {
+  text-align: center;
+}
+
+.flight-table .nowrap-cell {
+  white-space: nowrap;
+}
+
+/* --- 반응형 스타일 (모바일/태블릿) --- */
+@media screen and (max-width: 768px) {
+  .flight-table thead {
+    display: none;
+  }
+
+  .flight-table,
+  .flight-table tbody,
+  .flight-table tr,
+  .flight-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .flight-table tr {
+    /* 각 행을 카드처럼 보이게 */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .flight-table td {
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid #eee;
+    padding-left: 50%; 
+    position: relative;
+    text-align: right;
+  }
+
+  .flight-table td:last-child {
+    border-bottom: none;
+  }
+
+  .flight-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: calc(50% - 20px);
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .flight-table .center-align {
+    text-align: center;
+    padding-left: 10px;
+  }
+
+  .flight-table .center-align::before {
+    display: none;
+  }
+}
