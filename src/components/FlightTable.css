@@ -13,7 +13,7 @@
 }
 
 .table-wrapper {
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 .flight-table {

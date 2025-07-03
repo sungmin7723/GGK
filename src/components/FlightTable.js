@@ -27,7 +27,7 @@ const renderCell = (key, value) => {
   return <input type="text" defaultValue={value} />;
 };
 
-// 준비시간 자동 계산
+// 상태 관리 로직
 const FlightTable = ({ data }) => {
   // 비행편, 도착지, 완료 여부를 필터링하기 위한 상태
   // 필터 입력을 바꾸면 값이 변경되면서 필터링된 데이터가 보여진다.
@@ -70,7 +70,7 @@ const FlightTable = ({ data }) => {
   );
 
 
-
+// 핸들러 로직
 const handleCheckboxChange = (id) => {
   const nowChecked = !completionStatus[id];
 
@@ -112,11 +112,9 @@ const handleCheckboxChange = (id) => {
 };
 
   return (
-      <div style={{ maxWidth: '834px', margin: '0 auto', padding: '10px'}}>
-         <div style={{ marginBottom: '10px' }}>
-          <label style={{ marginRight: '10px' }}> 
-          {/* 테이블과 필터 UI */}
-          
+      <div className="flight-tablecontainer">
+         <div className="filter-controls">
+          <label>
           비행편명:
           <select value={flightFilter} onChange={(e) => setFlightFilter(e.target.value)}>
             <option value="">전체</option>
@@ -126,7 +124,7 @@ const handleCheckboxChange = (id) => {
           </select>
         </label>
 
-        <label style={{ marginRight: '10px' }}>
+        <label>
           목적지:
           <select value={destinationFilter} onChange={(e) => setDestinationFilter(e.target.value)}>
             <option value="">전체</option>
@@ -146,58 +144,47 @@ const handleCheckboxChange = (id) => {
         </label>
       </div>
 
-          <div style={{ overflowX: 'auto' }}>
-        <table
-          border="1"
-          cellPadding="8"
-          style={{
-            borderCollapse: 'collapse',
-            width: '100%',
-            tableLayout: 'auto',
-            wordBreak: 'keep-all',
-            whiteSpace: 'normal',
-            marginBottom: 0,
-          }}
-        >
+      <div className="table-wrapper">
+        <table className="flight-table">
           <thead>
             <tr>
-              <th style={{ whiteSpace: 'nowrap' }}>ID</th>
-              <th style={{ whiteSpace: 'nowrap' }}>비행편명</th>
-              <th style={{ whiteSpace: 'nowrap' }}>목적지</th>
-              <th style={{ whiteSpace: 'nowrap' }}>기종</th>
-              <th style={{ whiteSpace: 'nowrap' }}>출발날짜</th>
-              <th style={{ whiteSpace: 'nowrap' }}>출발시간</th>
-              <th style={{ whiteSpace: 'nowrap' }}>작업시작시간</th>
-              <th style={{ whiteSpace: 'nowrap' }}>준비시간</th>
-              <th style={{ whiteSpace: 'nowrap' }}>작업종료시간</th>
-              <th style={{ whiteSpace: 'nowrap' }}>완료</th>
-              <th style={{ whiteSpace: 'nowrap' }}>주석</th>
-              <th style={{ whiteSpace: 'nowrap' }}>완료일자</th>
-              <th style={{ whiteSpace: 'nowrap' }}>완료시간</th>
+              <th>ID</th>
+              <th>비행편명</th>
+              <th>목적지</th>
+              <th>기종</th>
+              <th>출발날짜</th>
+              <th className="center-align">출발시간</th>
+              <th className="center-align">작업시작</th>
+              <th className="center-align">준비시간</th>
+              <th className="center-align">작업종료</th>
+              <th className="center-align">완료</th>
+              <th>주석</th>
+              <th className="center-align">완료일자</th>
+              <th className="center-align">완료시간</th>
             </tr>
           </thead>
           <tbody>
             {filteredData.map((f) => (
               <tr key={f.id}>
-                <td>{f.id}</td>
-                <td>{renderCell('flight', f.flight)}</td>
-                <td style={{ maxWidth: '200px', wordBreak: 'keep-all', whiteSpace: 'normal'}}>{renderCell('destination', f.destination)}</td>
-                <td>{renderCell('aircraft', f.aircraft)}</td>
-                <td style= {{ whiteSpace: 'nowrap' }}>{renderCell('departureDate', f.departureDate)}</td>
-                <td style={{ textAlign: 'center' }}>{renderCell('departureTime', f.departureTime)}</td>
-                <td style={{ textAlign: 'center' }}>{renderCell('startTime', f.startTime)}</td>
-                <td style={{ textAlign: 'center' }}>{f.prepDays ?? -1}</td>
-                <td style={{ textAlign: 'center' }}>{renderCell('endTime', f.endTime)}</td>
-                <td style={{ textAlign: 'center' }}>
+                <td data-label="ID">{f.id}</td>
+                <td data-label="비행편명">{renderCell('flight', f.flight)}</td>
+                <td data-label="목적지">{renderCell('destination', f.destination)}</td>
+                <td data-label="기종">{renderCell('aircraft', f.aircraft)}</td>
+                <td data-label="출발날짜" className="nowrap-cell">{renderCell('departureDate', f.departureDate)}</td>
+                <td data-label="출발시간" className="center-align">{renderCell('departureTime', f.departureTime)}</td>
+                <td data-label="작업시작" className="center-align">{renderCell('startTime', f.startTime)}</td>
+                <td data-label="준비시간" className="center-align">{f.prepDays ?? -1}</td>
+                <td data-label="작업종료" className="center-align">{renderCell('endTime', f.endTime)}</td>
+                <td data-label="완료" className="center-align">
                   <input
                     type="checkbox"
                     checked={completionStatus[f.id] || false}
                     onChange={() => handleCheckboxChange(f.id)}
                   />
                 </td>
-                <td>{renderCell('note', f.note)}</td>
-                <td style={{ textAlign: 'center' }}>{completionStatus[f.id] && completionTimestamps[f.id]?.date}</td>
-                <td style={{ textAlign: 'center' }}>{completionStatus[f.id] && completionTimestamps[f.id]?.time}</td>
+                <td data-label="주석">{renderCell('note', f.note)}</td>
+                <td data-label="완료일자" className="center-align">{completionStatus[f.id] && completionTimestamps[f.id]?.date}</td>
+                <td data-label="완료시간" className="center-align">{completionStatus[f.id] && completionTimestamps[f.id]?.time}</td>
               </tr>
             ))}
           </tbody>
