@@ -21,7 +21,7 @@ const WashPack2Data = [
 
 const WashAndPack2 = () => (
     <div>
-        <h2 style={{ textAlign: 'center', marginTop: '20px' , marginBottom: '30px', fontSize: '24px'}}>Make and Pack 1</h2>
+        <h2 style={{ textAlign: 'center', marginTop: '20px' , marginBottom: '30px', fontSize: '24px'}}>Wash And ack1</h2>
         <FlightTable data={WashPack2Data} />
     </div>
 );

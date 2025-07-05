@@ -96,7 +96,7 @@ const MakePack3Data = [
 
 const MakeAndPack3 = () => (
     <div>
-        <h2 style={{ textAlign: 'center', marginTop: '20px' , marginBottom: '30px', fontSize: '24px'}}>Make and Pack 1</h2>
+        <h2 style={{ textAlign: 'center', marginTop: '20px' , marginBottom: '30px', fontSize: '24px'}}>Make and Pack 3</h2>
         <FlightTable data={MakePack3Data} />
     </div>
 );

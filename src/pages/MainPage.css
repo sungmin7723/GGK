@@ -31,9 +31,9 @@
   align-items: center;
   gap: 1rem;
   padding: 1.5rem;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .department-column h2 {
@@ -82,7 +82,21 @@
 /* 관리자 섹션 */
 .admin-section {
   margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  
+  /* ✅ 크기 조절 */
+  flex: 1;
+  min-width: 250px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
+
 
 .admin-section h2 {
   font-size: 1.5rem;
