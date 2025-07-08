@@ -1,7 +1,7 @@
 import React from 'react';
 import FlightTable from '../components/FlightTable';
 
-const MakePack3Data = [
+export const makeAndPack3Data = [
     {
         id: 1,
         flight: 'OZ 9999',
@@ -96,8 +96,8 @@ const MakePack3Data = [
 
 const MakeAndPack3 = () => (
     <div>
-        <h2 style={{ textAlign: 'center', marginTop: '20px' , marginBottom: '30px', fontSize: '24px'}}>Make and Pack 3</h2>
-        <FlightTable data={MakePack3Data} />
+        <h2 style={{ textAlign: 'center', marginTop: '20px' , marginBottom: '30px', fontSize: '24px'}}>Make and Pack 1</h2>
+        <FlightTable data={makeAndPack3Data} />
     </div>
 );
 

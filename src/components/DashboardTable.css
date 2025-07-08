@@ -1,0 +1,40 @@
+.dashboard-container {
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.dashboard-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.dashboard-controls input,
+.dashboard-controls select {
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: center;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  border: 1px solid #ccc
+}
+
+.cell-complete {
+  background-color: #c8f7c5; /* 연한 초록 */
+  color: #2e7d32;            /* 진한 초록 */
+  font-weight: bold;
+}
+
+.cell-incomplete {
+  background-color: #ffcdd2; /* 연한 빨강 */
+  color: #c62828;            /* 진한 빨강 */
+  font-weight: bold;
+}
