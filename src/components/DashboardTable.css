@@ -1,0 +1,54 @@
+.dashboard-container {
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.dashboard-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.dashboard-controls input,
+.dashboard-controls select {
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  line-height: 1.2;
+  font-size: 14px;
+  text-align: center;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  border: 1px solid #ccc;
+  padding: 4px 6px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: normal;
+  
+}
+
+/* 4. 필요하면 일부 컬럼 비율 고정 (예: 비행편명, 상태) */
+.dashboard-table th:nth-child(1),
+.dashboard-table td:nth-child(1) { width: 8%; }   /* ID 컬럼 */
+.dashboard-table th:nth-child(2),
+.dashboard-table td:nth-child(2) { width: 10%; }  /* 비행편명 */
+/* … 나머지는 auto */
+
+.cell-complete {
+  background-color: #c8f7c5; /* 연한 초록 */
+  color: #2e7d32;            /* 진한 초록 */
+  font-weight: bold;
+}
+
+.cell-incomplete {
+  background-color: #ffcdd2; /* 연한 빨강 */
+  color: #c62828;            /* 진한 빨강 */
+  font-weight: bold;
+}
