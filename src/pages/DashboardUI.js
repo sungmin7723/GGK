@@ -36,6 +36,88 @@ const countStatus = (arr) => {
   return { completed, notCompleted };
 };
 
+// ✅ PieChart 안전 렌더링 (데이터 없으면 메시지)
+const renderPie = (data) => {
+  const safeData = data || [];
+  const hasData = safeData.some(d => d.value > 0);
+
+  return (
+    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+      {hasData ? (
+        <ResponsiveContainer width="95%" height={300}>
+          <PieChart>
+            <Pie
+              data={safeData}
+              cx="50%"
+              cy="50%"
+              outerRadius="45%" /* ✅ 반응형 */
+              dataKey="value"
+              label
+              labelLine={false}
+            >
+              {safeData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index]} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend verticalAlign="bottom" height={40} />
+          </PieChart>
+        </ResponsiveContainer>
+      ) : (
+        <div
+          style={{
+            height: 300,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#999",
+            fontSize: "1.1rem",
+          }}
+        >
+          📭 데이터 없음
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ✅ BarChart 안전 렌더링 (데이터 없으면 메시지)
+const renderBar = (data) => {
+  const safeData = data || [];
+  const hasData = safeData.some(d => (d.완료 > 0 || d.미완료 > 0));
+
+  return (
+    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+      {hasData ? (
+        <ResponsiveContainer width="95%" height={300}>
+          <BarChart data={safeData} barSize={30}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend verticalAlign="bottom" height={36} />
+            <Bar dataKey="완료" fill="#4caf50" />
+            <Bar dataKey="미완료" fill="#f44336" />
+          </BarChart>
+        </ResponsiveContainer>
+      ) : (
+        <div
+          style={{
+            height: 300,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#999",
+            fontSize: "1.1rem",
+          }}
+        >
+          📭 데이터 없음
+        </div>
+      )}
+    </div>
+  );
+};
+
 function DashboardUI() {
   // ✅ 부서별 카운트
   const makeCount = useMemo(() => countStatus([
@@ -72,44 +154,6 @@ function DashboardUI() {
   const makeBar = [{ name: "Make&Pack", 완료: makeCount.completed, 미완료: makeCount.notCompleted }];
   const pickBar = [{ name: "Pick&Pack", 완료: pickCount.completed, 미완료: pickCount.notCompleted }];
   const washBar = [{ name: "Wash&Pack", 완료: washCount.completed, 미완료: washCount.notCompleted }];
-
-  // ✅ 파이차트
-  const renderPie = (data) => (
-    <ResponsiveContainer width="100%" height={300}>
-      <PieChart>
-        <Pie
-          data={data}
-          cx="50%"
-          cy="50%"
-          outerRadius={100}   // ✅ 좀 더 크게
-          dataKey="value"
-          label
-          labelLine={false}   // ✅ 라벨선 제거 → 덜 겹침
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index]} />
-          ))}
-        </Pie>
-        <Tooltip />
-        <Legend verticalAlign="bottom" height={36} /> {/* ✅ 범례 아래쪽 */}
-      </PieChart>
-    </ResponsiveContainer>
-  );
-
-  // ✅ 바차트
-  const renderBar = (data) => (
-    <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={data} barSize={40}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend verticalAlign="bottom" height={36} />
-        <Bar dataKey="완료" fill="#4caf50" />
-        <Bar dataKey="미완료" fill="#f44336" />
-      </BarChart>
-    </ResponsiveContainer>
-  );
 
   return (
     <div className="dashboard-ui-container">

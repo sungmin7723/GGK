@@ -44,16 +44,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  min-height: 500px; /* ✅ 카드 높이 확보 */
+  min-height: 520px;
+  overflow: hidden; /* ✅ 혹시라도 넘치는 요소 숨김 */
 }
 
-/* ✅ 카드 hover 시 살짝 띄우기 */
+/* ✅ 카드 hover 시 살짝 띄우기
 .department-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-}
+} */
 
 /* ✅ 부서 이름 */
 .department-card h2 {
@@ -74,9 +75,4 @@
   display: flex;
   flex-direction: column;
   gap: 30px; /* Pie와 Bar 사이 간격 */
-}
-
-/* ✅ ResponsiveContainer 높이 확보 */
-.chart-wrap > * {
-  min-height: 300px;
 }
